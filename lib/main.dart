@@ -14,9 +14,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 1, 2)),
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 17, 83, 4),
+          brightness: Brightness.dark,
+        ),
+        fontFamily: 'montserrat',
+        textTheme: TextTheme(
+          displayMedium: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 18,
+          ),
+        ),
       ),
       home: const MyHomePage(title: 'aprendiendo flutter'),
     );
@@ -75,26 +87,40 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('You have pushed the button this many times:',
+              style: Theme.of(context).textTheme.bodyLarge),
+          Text(
+            '$_counter',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.bodyLarge,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => pantallados()),
+              );
+            },
+            child: Text("ir a pagina 2"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              print("Botón presionado");
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("cada text es como un child"),
+                Text("texto 2")
+              ],
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => pantallados()),
-                  );
-                },
-                child: Text("ir a pagina 2")),
-          ],
-        ),
-      ),
+          )
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
